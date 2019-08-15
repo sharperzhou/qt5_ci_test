@@ -3,3 +3,5 @@
 !/main.cpp
 !/.gitignore
 !/README.md
+!/.travis.yml
+!/appveyor.yml
