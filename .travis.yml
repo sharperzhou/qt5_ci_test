@@ -12,10 +12,10 @@ script:
   - cmake -DCMAKE_BUILD_TYPE=Release ..
   - cmake --build . --target install
 
-before_deploy:
-  - cd ../bin
-  - tar -zcvf qt5_ci_test_ubuntu_x86_64.tar.gz *
-  - cd ..
+#before_deploy:
+#  - cd ../bin
+#  - tar -zcvf qt5_ci_test_ubuntu_x86_64.tar.gz *
+#  - cd ..
 
 deploy:
   provider: releases
