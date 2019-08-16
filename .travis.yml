@@ -11,15 +11,16 @@ script:
   - cd build
   - cmake -DCMAKE_BUILD_TYPE=Release ..
   - cmake --build . --target install
-  - cd ..
 
 before_deploy:
-  - mv bin qt5_ci_test_ubuntu_amd64
+  - cd ../bin
+  - tar -zcvf qt5_ci_test_ubuntu_x86_64.tar.gz *
+  - cd ..
 
 deploy:
   provider: releases
   api_key: $Token
-  file: qt5_ci_test_ubuntu_amd64
+  file: bin/qt5_ci_test_ubuntu_x86_64.tar.gz
   skip_cleanup: true
   on:
     all_branches: true
