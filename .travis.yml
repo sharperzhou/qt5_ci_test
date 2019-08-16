@@ -1,0 +1,23 @@
+dist: bionic
+language: cpp
+compiler: gcc
+
+before_install:
+  - sudo apt-get install qtbase5-dev qttools5-dev
+  - export QT_SELECT=qt5
+
+script:
+  - mkdir -p build
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE=Release ..
+  - cmake --build . --target install
+  - cd ..
+
+before_deploy:
+  - mv bin qt5_ci_test_ubuntu_amd64
+
+deploy:
+  provider: releases
+  api_key: $Token
+  file: qt5_ci_test_ubuntu_amd64
+  skip_cleanup: true
