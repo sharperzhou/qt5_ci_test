@@ -21,3 +21,5 @@ deploy:
   api_key: $Token
   file: qt5_ci_test_ubuntu_amd64
   skip_cleanup: true
+  on:
+    all_branches: true
