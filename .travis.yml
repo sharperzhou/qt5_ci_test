@@ -17,12 +17,13 @@ before_deploy:
   - LatestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
   - echo "$LatestTag"
   - cd bin
-  - tar -zcvf "qt5_ci_test-${LatestTag}-linux-x86_64.tar.gz" *
+  - tar -zcvf qt5_ci_test-${LatestTag}-linux-x86_64.tar.gz *
+  - cd ..
 
 deploy:
   provider: releases
   api_key: $Token
-  file: bin/"qt5_ci_test-${LatestTag}-linux-x86_64.tar.gz"
+  file: bin/qt5_ci_test-${LatestTag}-linux-x86_64.tar.gz
   skip_cleanup: true
   on:
     tags: true
