@@ -1,19 +1,37 @@
 dist: bionic
 language: cpp
-compiler: gcc
+services:
+  - docker
 
-before_install:
-  - sudo apt-get install qtbase5-dev qttools5-dev
-  - export QT_SELECT=qt5
+matrix:
+  include:
+    - os: linux
+      env: TARGET=system-qt5-linux
+      addons:
+        apt:
+          packages:
+          - qtbase5-dev
+          - qttools5-dev
+          
+    - os: windows
+      env: TARGET=custom-qt4-windows
+
+#before_install:
+#  - sudo apt-get install qtbase5-dev qttools5-dev
+#  - export QT_SELECT=qt5
+
+#script:
+#  - mkdir -p build
+#  - cd build
+#  - cmake -DCMAKE_BUILD_TYPE=Release ..
+#  - cmake --build . --target install
 
 script:
-  - mkdir -p build
-  - cd build
-  - cmake -DCMAKE_BUILD_TYPE=Release ..
-  - cmake --build . --target install
+  if [[$TARGET == "system-qt5-linux"]]; then export QT_SELECT=qt5 &&  cmake -H. -Bbuild && cmake --build build --target install;
+  elif [[ $TARGET == "custom-qt4-windows" ]]; then cmake -H. -Bbuild && cmake --build build --target install;
+  fi
 
 before_deploy:
-  - cd ..
   - LatestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
   - echo "$LatestTag"
   - cd bin
