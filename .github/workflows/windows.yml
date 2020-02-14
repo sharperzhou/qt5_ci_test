@@ -32,7 +32,7 @@ jobs:
             msvc_arch: x86
             qt_arch_install: msvc2017
     env:
-      targetName: HelloActions-Qt.exe
+      targetName: qt5_ci_test.exe
     # 步骤
     steps:  
       # 安装Qt
